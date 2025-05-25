@@ -1,0 +1,11 @@
+name: GGIFragGPT
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.16=he725a3c_1_cpython
+  - pip:
+      - numpy==1.26.4
+      - pandas==2.2.3
+      - rdkit==2024.9.6
+      # - torch==2.6.0+cu124
+      - tqdm==4.67.1
