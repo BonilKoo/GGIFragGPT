@@ -1,7 +1,7 @@
 import argparse
 import os
 os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"  # Arrange GPU devices starting from 0
-os.environ["CUDA_VISIBLE_DEVICES"]= "1"
+os.environ["CUDA_VISIBLE_DEVICES"]= "0"
 import pickle
 import sys
 
@@ -86,6 +86,7 @@ def make_dataset_file(data, sig_info, cell_info, args):
     dataset_all = Dataset(pa.Table.from_pandas(dataset_df))
 
     dataset_file = f'{args.data_dir}/processed.dataset'
+    os.makedirs(os.path.dirname(dataset_file), exist_ok=True)
     dataset_all.save_to_disk(dataset_file)
     return dataset_file
 

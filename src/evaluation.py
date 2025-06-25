@@ -5,7 +5,7 @@ from rdkit import Chem, DataStructs
 from rdkit.Chem import QED
 from rdkit.Contrib.SA_Score.sascorer import calculateScore
 
-from fcd_torch import FCD
+# from fcd_torch import FCD
 
 def cal_validity(smi_list):
     val = 0
@@ -75,8 +75,8 @@ def evaluate(smi_list, ref_smi_list, device):
     internal_diversity = cal_internal_diversity(smi_valid_uniq)
     print(f'Internal_diversity: {internal_diversity}')
 
-    fcd_score = cal_FCD(smi_valid, ref_smi_list, device)
-    print(f'Fréchet ChemNet Distance: {fcd_score}')
+    # fcd_score = cal_FCD(smi_valid, ref_smi_list, device)
+    # print(f'Fréchet ChemNet Distance: {fcd_score}')
     
     QED_scores = cal_QEDscore(smi_valid_uniq)
     QED_mean = np.mean(QED_scores)
@@ -91,7 +91,7 @@ def evaluate(smi_list, ref_smi_list, device):
         'novelty': novelty,
         'uniqueness': uniqueness,
         'internal diversity': internal_diversity,
-        'Fréchet ChemNet Distance': fcd_score,
+        # 'Fréchet ChemNet Distance': fcd_score,
         'QED': QED_mean,
         'SA': SA_mean
            }

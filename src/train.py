@@ -1,8 +1,7 @@
 import torch
 from torch.utils.data import random_split
 
-# from args import parse_args
-from args import parse_args2
+from args import parse_args
 from dataset import TrainDataset
 from model import FragmentTransformer
 from trainer import ModelTrainer

@@ -64,18 +64,18 @@ class TrainDataset(Dataset):
         
         self.max_len += 2 # [STRAT] [END]
 
-        # torch.save((
-        #     self.ge_emb,
-        #     self.cell_lines,
-        #     self.frags_tokens,
-        #     self.frag2idx,
-        #     self.idx2frag,
-        #     self.cell2idx,
-        #     self.max_len,
-        #     self.vocab_size,
-        #     self.padding_idx,
-        # ),
-        #            self.processed_file_name)
+        torch.save((
+            self.ge_emb,
+            self.cell_lines,
+            self.frags_tokens,
+            self.frag2idx,
+            self.idx2frag,
+            self.cell2idx,
+            self.max_len,
+            self.vocab_size,
+            self.padding_idx,
+        ),
+                   self.processed_file_name)
 
     def __getitem__(self, index):
         return self.ge_emb[index], self.cell_lines[index], self.frags_tokens[index]

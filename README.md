@@ -8,9 +8,7 @@ GGIFragGPT: transcriptome-conditioned molecule generation via gene-gene interact
 The code has been tested in the following environment:
 
 Environment file:  
-```bash
-environment.yml
-```
+`environment.yml`
 
 - Python 3.10.16
 - anndata 0.11.3
