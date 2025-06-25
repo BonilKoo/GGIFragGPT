@@ -4,7 +4,7 @@ import pandas as pd
 import torch
 
 from args import parse_args
-from datasets import AttentionDataset
+from dataset import AttentionDataset
 from evaluation import evaluate
 from trainer import GetAttention
 from utils import seed_everything, load_model

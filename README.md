@@ -1,29 +1,64 @@
 # GGIFragGPT
+GGIFragGPT: transcriptome-conditioned molecule generation via gene-gene interaction-aware fragment modeling
 
-## Requirements
-- Python 3.10.16
-- numpy 1.26.4
-- pandas 2.2.3
-- rdkit 2024.9.6
-- torch 2.6.0+cu124
-- tqdm 4.67.1
+## Installation
+
+### Dependency
+
+The code has been tested in the following environment:
 
 Environment file:  
 ```bash
 environment.yml
 ```
 
-## Installation & Setup
+- Python 3.10.16
+- anndata 0.11.3
+- datasets 3.4.0
+- loompy 3.0.8
+- matplotlib 3.10.1
+- numpy 1.26.4
+- optuna 4.2.1
+- optuna-integration[tensorboard] 4.2.1
+- pandas 2.2.3
+- pyarrow 19.0.1
+- peft 0.14.0
+- rdkit 2024.9.6
+- scanpy 1.11.0
+- tdigest 0.5.2.2
+- tensorboard 2.19.0
+- torch 2.6.0+cu124
+- tqdm 4.67.1
+- transformers 4.49.0
+
+You can change the package version according to your need.
+
+### Install via Mamba
+
+You can set up the environment using [Mamba](https://github.com/conda-forge/miniforge).
 ```bash
 mamba env create -f environment.yml
 mamba activate GGIFragGPT
+pip install optuna-integration[tensorboard]==4.2.1 --no-deps
 pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 ```
 
 ## Usage
-Three main workflows are supported:
 
-### 1. Training
+### 1. Gene embedding extraction using Geneformer
+```bash
+python src/Geneformer_extract_embeddings.py \
+  --data_dir ./data \
+  --ge ./data/LINCS/processed_level5_beta_trt_cp.tsv \
+  --sig ./data/LINCS/processed_siginfo_beta_trt_cp.tsv \
+  --cell ./data/LINCS/processed_cellinfo_beta.tsv \
+  --token ./data/Geneformer/LINCS_lm_token_95M.csv
+```
+
+*Output*
+- `./data/extracted_geneformer_embs.pt`
+
+### 2. Training
 ```bash
 python src/train.py \
   --dataset_name train_dict_unk \
@@ -32,7 +67,7 @@ python src/train.py \
   --d_ff 64
 ```
 
-### 2. Testing
+### 3. Testing
 ```bash
 python src/test.py \
   --dataset_name train_dict_unk \
@@ -41,7 +76,7 @@ python src/test.py \
   --d_ff 64
 ```
 
-### 3. Generation
+### 4. Generation
 ```bash
 python src/generate.py \
   --ge_emb data/processed_level5_beta_trt_sh_CDK7.pt \

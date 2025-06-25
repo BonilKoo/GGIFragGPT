@@ -1,0 +1,4 @@
+include geneformer/gene_median_dictionary_gc95M.pkl
+include geneformer/gene_name_id_dict_gc95M.pkl
+include geneformer/ensembl_mapping_dict_gc95M.pkl
+include geneformer/token_dictionary_gc95M.pkl

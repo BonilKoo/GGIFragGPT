@@ -1,0 +1,17 @@
+cell_iname	cellosaurus_id	donor_age	donor_age_death	donor_disease_age_onset	doubling_time	growth_medium	provider_catalog_id	feature_id	cell_type	donor_ethnicity	donor_sex	donor_tumor_phase	cell_lineage	primary_disease	subtype	provider_name	growth_pattern	ccle_name	cell_alias
+HCC515	CVCL_5136								tumor	Unknown	F	Unknown	lung	lung cancer	carcinoma		adherent	HCC515_LUNG	HCC0515
+HA1E					60	MEM-ALPHA (Invitrogen A1049001) supplemented with 10% v/v fetal bovine serum (Sigma F4135) and 1% 100X penicillin-streptomycin-glutamine (Invitrogen 10378-016)			normal	Unknown	Unknown	Unknown	kidney	normal kidney sample	normal kidney sample		unknown	HA1E_KIDNEY	
+NPC					28				normal	Unknown	Unknown	Unknown	central_nervous_system	normal stem cell sample	normal stem cell sample		unknown		NPC-8330-8 NEURAL PROGENITORS
+ASC	CVCL_U602								normal	Unknown	Unknown	Unknown	soft_tissue	normal soft tissue sample	normal soft tissue sample		adherent		ADIPOCYTES
+THP1	CVCL_0006	1			19-50	RPMI-164 ATCC catalog # 3-21	TIB-202		tumor	Unknown	M	Unknown	haematopoietic_and_lymphoid_tissue	leukemia	acute myelogenous leukemia (aml)	ATCC	suspension	THP1_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE	THP-1|THP 1
+A549	CVCL_0023	58			48	F-12K ATCC catalog # 3-24	CCL-185	c-4	tumor	Caucasian	M	Primary	lung	lung cancer	non small cell carcinoma	ATCC	adherent	A549_LUNG	A 549
+A375	CVCL_0132	54			36	DMEM Invitrogen catalog # 11995-65	CRL-1619	c-127	tumor	Unknown	F	Metastatic	skin	skin cancer	melanoma	ATCC	adherent	A375_SKIN	A 375|A-375
+HT29	CVCL_0320	44			36	McCoy's 5A Invitrogen catalog # 166-82	HTB-38	c-272	tumor	Caucasian	F	Primary	large_intestine	colon cancer	adenocarcinoma	ATCC	adherent	HT29_LARGE_INTESTINE	HT 29
+HEPG2	CVCL_0027	15			84	EMEM ATCC catalog # 3-23	HB-8065		tumor	Caucasian	M	Primary	liver	liver cancer	carcinoma	ATCC	adherent	HEPG2_LIVER	Hep G2|HEP-G2
+MCF10A	CVCL_0598				20	(MEBM) along with the additives can be obtained from Lonza/Clonetics Corporation as a kit: MEGM, Kit Catalog No. CC-3150			tumor	Caucasian	F	Unknown	breast	breast cancer	carcinoma	ATCC	adherent		MCF 10A|MCF-10A
+MCF7	CVCL_0031	40			72	EMEM ATCC catalog # 3-23	HTB-22	c-438	tumor	Caucasian	F	Metastatic	breast	breast cancer	adenocarcinoma	ATCC	adherent	MCF7_BREAST	IBMF-7
+MDAMB231	CVCL_0062	51			60	RPMI-164 Invitrogen catalog # 11875-93	HTB-26	c-344	tumor	Caucasian	F	Metastatic	breast	breast cancer	adenocarcinoma	ATCC	adherent	MDAMB231_BREAST	MB231|MDA-MB-231
+HELA	CVCL_0030	31			24.67	EMEM (EBSS) + 2mM Glutamine + 1% Non Essential Amino Acids (NEAA) + 10% Foetal Bovine Serum (FBS).	CCL-2		tumor	Black	F	Unknown	cervix	cervical cancer	adenocarcinoma	ATCC	adherent		He La
+PC3	CVCL_0035	62			72	F-12K ATCC catalog # 3-24	CRL-1435	c-214	tumor	Caucasian	M	Metastatic	prostate	prostate cancer	adenocarcinoma	ATCC	mix	PC3_PROSTATE	PC.3|PC-3
+VCAP	CVCL_2235				220	DMEM ATCC catalog # 3-22			tumor	Caucasian	M	Metastatic	prostate	prostate cancer	adenocarcinoma	ATCC	adherent	VCAP_PROSTATE	Vcap
+YAPC	CVCL_1794	43			48	RPMI-164 (Hyclone Cat.# SH327.2)		c-112	tumor	Japanese	M	Unknown	pancreas	pancreatic cancer	carcinoma	DSMZ	adherent	YAPC_PANCREAS	

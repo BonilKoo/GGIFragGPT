@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import random_split
 
 from args import parse_args
-from datasets import ChEMBLDataset
+from dataset import ChEMBLDataset
 from model import FragmentGPT
 from trainer import PreTrainer
 from utils import seed_everything, save_data

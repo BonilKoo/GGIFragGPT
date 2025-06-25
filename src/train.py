@@ -1,8 +1,9 @@
 import torch
 from torch.utils.data import random_split
 
-from args import parse_args
-from datasets import TrainDataset
+# from args import parse_args
+from args import parse_args2
+from dataset import TrainDataset
 from model import FragmentTransformer
 from trainer import ModelTrainer
 from utils import seed_everything, save_data
@@ -24,5 +25,6 @@ def main(args):
     trainer.train()
 
 if __name__ == '__main__':
-    args = parse_args()
+    # args = parse_args()
+    args = parse_args2()
     main(args)

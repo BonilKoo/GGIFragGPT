@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import random_split
 
 from args import parse_args
-from datasets import TrainDataset
+from dataset import TrainDataset
 from model import load_pretrained_weights, FragmentTransformer
 from trainer import ModelTrainer
 from utils import seed_everything, save_data

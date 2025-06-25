@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import random_split
 
 from args import parse_args
-from datasets import TestDataset
+from dataset import TestDataset
 from evaluation import evaluate
 from trainer import MoleculeGenerator
 from utils import seed_everything, load_model
