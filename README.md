@@ -38,7 +38,7 @@ You can set up the environment using [Mamba](https://github.com/conda-forge/mini
 mamba env create -f environment.yml
 mamba activate GGIFragGPT
 pip install optuna-integration\[tensorboard\]==4.2.1 --no-deps
-pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124 # check your NVIDIA driver version on your system
 ```
 
 ## Usage
