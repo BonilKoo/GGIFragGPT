@@ -43,7 +43,7 @@ pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 
 ## Usage
 
-### 1. Gene embedding extraction using Geneformer
+### 1. Gene embedding extraction (Geneformer)
 ```bash
 python src/Geneformer_extract_embeddings.py \
   --data_dir ./data \
@@ -53,8 +53,7 @@ python src/Geneformer_extract_embeddings.py \
   --token ./data/Geneformer/LINCS_lm_token_95M.csv
 ```
 
-*Output*
-- `./data/extracted_geneformer_embs.pt`
+*Output*: `./data/extracted_geneformer_embs.pt`
 
 ### 2. Training
 ```bash
@@ -72,13 +71,13 @@ python src/run.py test \
 
 ### 4. Generation
 
-#### Step 1
+#### Step 1: Construct signature for target protein
 ```bash
 python src/construct_shRNA_sig.py \
   --target CDK7
 ```
 
-#### Step 2
+#### Step 2: Extract gene embedding
 ```bash
 python src/extract_gene_embeddings.py \
   --data_dir ./data/generation \
@@ -88,7 +87,7 @@ python src/extract_gene_embeddings.py \
   --token ./data/Geneformer/LINCS_lm_token_95M.csv
 ```
 
-#### Step 3
+#### Step 3: run generation
 ```bash
 python src/run.py generate \
   --out_path ./result \
@@ -99,39 +98,50 @@ python src/run.py generate \
   --n_mols 1000
 ```
 
-#### Common Arguments
-- `--dataset_name` (str, default: `test`): Name of the dataset to use.
-- `--device` (str, default: `cuda:0`): Device for computation (`cpu` or `cuda:0`, etc.).
-- `--seed` (int, default: 42): Random seed for reproducibility.
-- `--batch_size` (int, default: 128): Batch size for training (pretraining may use 512).
-- `--lr` (float, default: 0.0001): Learning rate.
-- `--d_model` (int, default: 16): Hidden dimension size of the transformer.
-- `--n_heads` (int, default: 8): Number of attention heads.
-- `--d_cell_line` (int, default: 4): Dimension of the cell-line embedding.
-- `--PE_dropout` (float, default: 0.1): Dropout rate for positional encoding.
-- `--dropout` (float, default: 0.1): General dropout rate.
-- `--d_ff` (int, default: 64): Dimension of the feed-forward layer.
-- `--act_func` (str, default: `relu`): Activation function.
-- `--n_layers` (int, default: 6): Number of transformer decoder layers.
+## Argument Overview
 
-#### Dataset & Data-Related Arguments
-- `--data_path` (str, default: `../../data`): Root path for all data files.
-- `--frag_dict` (str, default: `../../data/LINCS/fragment/fragment_dict.pkl`): Fragment dictionary (pickle).
-- `--val_ratio` (float, default: 0.1): Validation split ratio.
-- `--test_ratio` (float, default: 0.1): Test split ratio.
-- `--epochs` (int, default: 1000): Number of training epochs.
+### Common Arguments (shared by all modes)
 
-#### Fine-Tuning & Pretrained Settings
-- `--frag_dict_pretrained` (str, default: `../../data/ChEMBL/fragment/fragment_dict.pkl`): Pretrained fragment dictionary.
-- `--pretrained_ckpts` (str, default: `../../result/pretrain/ckpts_test/dim128_n6h8ff512_bs512_lr0.0001/best_model.ckpt`): Path to pretrained checkpoint.
+| Argument | Type | Default | Description |
+|------------------|----------|---------------|--------------------------------------------------|
+| `--dataset_name` | `str` | `experiment` | Dataset identifier |
+| `--out_path` | `str` | `./result` | Output folder |
+| `--device` | `str` | `cuda:0` | Device to use (`cpu`, `cuda:0`, etc.) |
+| `--seed` | `int` | `42` | Random seed |
+| `--batch_size` | `int` | `128` | Batch size |
+| `--lr` | `float` | `0.0001` | Learning rate |
+| `--d_model` | `int` | `16` | Transformer hidden dimension |
+| `--n_heads` | `int` | `8` | Number of attention heads |
+| `--d_cell_line` | `int` | `4` | Cell-line embedding dimension |
+| `--PE_dropout` | `float` | `0.1` | Positional encoding dropout |
+| `--dropout` | `float` | `0.1` | Dropout rate |
+| `--d_ff` | `int` | `64` | Feed-forward network dimension |
+| `--act_func` | `str` | `relu` | Activation function |
+| `--n_layers` | `int` | `6` | Number of decoder layers|
 
-#### Generation & Attention Extraction
-- `--n_mols` (int, default: 1): Number of molecules to generate.
-- `--gen_file` (str, default: `generated.csv`): Output file for generated SMILES.
-- `--ge_emb` (str): Path to gene expression embedding file.
-- `--sig_data` (str): Path to signature TSV file.
-- `--geneformer_dataset` (str): Path to Geneformer dataset TSV.
-- `--geneformer_token` (str): Path to Geneformer token CSV.
-- `--attn_out` (str): Output path for attention results TSV.
+---
 
-For detailed options and advanced workflows, see the docstrings in `src/args.py`.
+### Training-Specific Arguments
+
+| Argument | Type | Default | Description |
+|------------------|----------|---------------|--------------------------------------------------|
+| `--data_path` | `str` | `./data` | Root directory of dataset |
+| `--frag_dict` | `str` | `./data/LINCS/fragment_dict.pkl` | Fragment dictionary path |
+| `--val_ratio` | `float` | `0.1` | Validation set ratio |
+| `--test_ratio` | `float` | `0.1` | Test set ratio |
+| `--epochs` | `int` | `1000` | Number of epochs |
+| `--ge_emb` | `str` | `./data/extracted_geneformer_embs.pt` | Gene expression embeddings |
+| `--sig_data` | `str` | `./data/LINCS/processed_siginfo_beta_trt_cp.tsv` | Signature metadata |
+
+---
+
+### Generation-Specific Arguments
+
+| Argument | Type | Default | Description |
+|------------------|----------|---------------|--------------------------------------------------|
+| `--n_mols` | `int` | `1` | Number of molecules to generate |
+| `--gen_file` | `str` | `generated.csv` | Output file for SMILES generation |
+| `--ge_emb` | `str` | _(required)_ | Gene expression embedding path |
+| `--sig_data` | `str` | _(required)_ | Signature TSV file |
+
+---
