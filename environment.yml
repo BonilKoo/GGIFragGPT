@@ -1,4 +1,4 @@
-name: GGIFragGPT2
+name: GGIFragGPT
 channels:
   - conda-forge
 dependencies:
@@ -11,7 +11,7 @@ dependencies:
       - matplotlib==3.10.1
       - numpy==1.26.4
       - optuna==4.2.1
-      - optuna-integration[tensorboard]==4.2.1
+      # - optuna-integration[tensorboard]==4.2.1
       - pandas==2.2.3
       - pyarrow==19.0.1
       - peft==0.14.0
