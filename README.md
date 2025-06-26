@@ -12,6 +12,7 @@ Environment file:
 
 - Python 3.10.16
 - anndata 0.11.3
+- cmappy 4.0.1
 - datasets 3.4.0
 - loompy 3.0.8
 - matplotlib 3.10.1
@@ -71,6 +72,24 @@ python src/run.py test \
 ```
 
 ### 4. Generation
+
+#### Step 1
+```bash
+python src/construct_shRNA_sig.py \
+  --target CDK7
+```
+
+#### Step 2
+```bash
+python src/extract_gene_embeddings.py \
+  --data_dir ./data/generation \
+  --ge ./data/generation/level5_beta_trt_sh_CDK7.tsv \
+  --sig ./data/generation/siginfo_beta_trt_sh_CDK7.tsv \
+  --cell ./data/LINCS/processed_cellinfo_beta.tsv \
+  --token ./data/Geneformer/LINCS_lm_token_95M.csv
+```
+
+#### Step 3
 ```bash
 python src/run.py generate \
   --out_path ./result \

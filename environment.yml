@@ -5,6 +5,7 @@ dependencies:
   - python=3.10.16=he725a3c_1_cpython
   - pip:
       - anndata==0.11.3
+      - cmappy==4.0.1
       - datasets==3.4.0
       - loompy==3.0.8
       - matplotlib==3.10.1
