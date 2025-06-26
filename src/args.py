@@ -141,9 +141,9 @@ def parse_args2():
     parser = argparse.ArgumentParser(
         description="Parser for training and testing the molecule generation model."
     )
-
     subparsers = parser.add_subparsers(dest='command', help='Subcommands.')
 
+    ##########
     subparser_train = subparsers.add_parser('train', help='train')
 
     subparser_train.add_argument(
@@ -175,7 +175,7 @@ def parse_args2():
         help="Number of training epochs."
     )
     subparser_train.add_argument(
-        '--dataset_name', type=str, default='dataset',
+        '--dataset_name', type=str, default='experiment',
         help="Name of the dataset to be used."
     )
     subparser_train.add_argument(
@@ -230,8 +230,19 @@ def parse_args2():
         '--n_layers', type=int, default=6,
         help="Number of transformer decoder layers."
     )
+    ##########
 
+    ##########
     subparser_test = subparsers.add_parser('test', help='test')
+
+    subparser_test.add_argument(
+        '--dataset_name', type=str, default='experiment',
+        help="Name of the dataset to be used."
+    )
+    subparser_test.add_argument(
+        '--out_path', type=str, default='./result',
+        help="Output directory where results and checkpoints will be saved."
+    )
 
     subparser_test.add_argument(
         '--device', type=str, default='cuda:0',
@@ -282,7 +293,9 @@ def parse_args2():
         '--n_layers', type=int, default=6,
         help="Number of transformer decoder layers."
     )
+    ##########
 
+    ##########
     subparser_generate = subparsers.add_parser('generate', help='generate')
 
     subparser_generate.add_argument(
@@ -342,6 +355,7 @@ def parse_args2():
         '--n_layers', type=int, default=6,
         help="Number of transformer decoder layers."
     )
+    ##########
     
     args = parser.parse_args()
     # args, _ = parser.parse_known_args()

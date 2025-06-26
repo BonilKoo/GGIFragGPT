@@ -5,7 +5,7 @@ from torch.utils.data import random_split
 # from args import parse_args
 from args import parse_args2
 from dataset import TrainDataset, TestDataset, GenerationDataset
-from model import FragmentTransformer
+from model import GGIFragGPT
 from trainer import ModelTrainer, MoleculeGenerator
 from utils import seed_everything, save_data, load_model
 from evaluation import evaluate
@@ -15,15 +15,13 @@ def train(args):
     device = torch.device(args.device if torch.cuda.is_available() else 'cpu')
 
     mydataset = TrainDataset(args.data_path, args.dataset_name, args.ge_emb, args.sig_data, args.frag_dict)
-
     dataset_size = len(mydataset)
     train_ratio = 1 - args.val_ratio - args.test_ratio
     train_dataset, val_dataset, test_dataset = random_split(mydataset, [train_ratio, args.val_ratio, args.test_ratio])
-    
     args.ge_dim = train_dataset.dataset.ge_emb.shape[-1]
     save_data(mydataset, train_dataset.indices, val_dataset.indices, test_dataset.indices, args)
 
-    model = FragmentTransformer(mydataset, args)
+    model = GGIFragGPT(mydataset, args)
 
     trainer = ModelTrainer(model, train_dataset, val_dataset, test_dataset, device, args)
     trainer.train()
@@ -43,7 +41,7 @@ def test(args):
 
     result = test_dataset.sig_info
     result['generated'] = generated
-    result.to_csv(f'{args.out_path}/ckpts_{args.dataset_name}/generated.csv')
+    result.to_csv(f'{args.out_path}/{args.dataset_name}/test.csv')
 
 def generate(args):
     seed_everything(args.seed)
@@ -62,7 +60,7 @@ def generate(args):
     result = dataset.sig_info
     result = result.loc[result.index.to_list() * args.n_mols]
     result['generated'] = generated
-    result.to_csv(f'{args.out_path}/ckpts_{args.dataset_name}/{args.gen_file}')
+    result.to_csv(f'{args.out_path}/{args.dataset_name}/{args.gen_file}')
 
 if __name__ == '__main__':
     # args = parse_args()
@@ -77,5 +75,3 @@ if __name__ == '__main__':
     else:
         print(f"Unknown command: {args.command}. Please use 'train', 'test', or 'generate'.")
         exit(1)
-
-    train(args)

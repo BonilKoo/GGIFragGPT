@@ -92,7 +92,7 @@ class TestDataset(Dataset):
         self.ge_emb = self.ge_emb.type(torch.float)
 
     def process(self):
-        dir_dataset = f'{self.data_path}/ckpts_{self.dataset_name}/dataset'
+        dir_dataset = f'{self.data_path}/{self.dataset_name}/dataset'
         test_data = torch.load(f'{dir_dataset}/test_data.pt', weights_only=False)
         with open(f'{dir_dataset}/metadata.pkl', 'rb') as f:
             metadata = pickle.load(f)
@@ -172,7 +172,7 @@ class AttentionDataset(Dataset):
         self.ge_emb = self.ge_emb.type(torch.float)
 
     def process(self):
-        dir_dataset = f'{self.data_path}/ckpts_{self.dataset_name}/dataset'
+        dir_dataset = f'{self.data_path}/{self.dataset_name}/dataset'
         test_data = torch.load(f'{dir_dataset}/test_data.pt', weights_only=False)
         with open(f'{dir_dataset}/metadata.pkl', 'rb') as f:
             metadata = pickle.load(f)
@@ -233,7 +233,7 @@ class GenerationDataset(Dataset):
         self.ge_emb = self.ge_emb.type(torch.float)
 
     def process(self):
-        dir_dataset = f'{self.data_path}/ckpts_{self.dataset_name}/dataset'
+        dir_dataset = f'{self.data_path}/{self.dataset_name}/dataset'
         with open(f'{dir_dataset}/metadata.pkl', 'rb') as f:
             metadata = pickle.load(f)
         self.ge_emb = torch.load(self.ge_file)

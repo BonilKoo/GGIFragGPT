@@ -3,7 +3,7 @@ from torch.utils.data import random_split
 
 from args import parse_args
 from dataset import TrainDataset
-from model import load_pretrained_weights, FragmentTransformer
+from model import load_pretrained_weights, GGIFragGPT
 from trainer import ModelTrainer
 from utils import seed_everything, save_data
 
@@ -18,7 +18,7 @@ def main(args):
     args.ge_dim = train_dataset.dataset.ge_emb.shape[-1]
     save_data(mydataset, train_dataset.indices, val_dataset.indices, test_dataset.indices, args)
 
-    model = FragmentTransformer(mydataset, args)
+    model = GGIFragGPT(mydataset, args)
     model = load_pretrained_weights(model, args)
 
     trainer = ModelTrainer(model, train_dataset, val_dataset, test_dataset, device, args)

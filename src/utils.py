@@ -8,7 +8,7 @@ import pandas as pd
 
 from rdkit import Chem
 
-from model import FragmentTransformer
+from model import GGIFragGPT
 
 def seed_everything(seed):
     os.environ['PYTHONHASHSEED'] = str(seed)
@@ -22,7 +22,7 @@ def seed_everything(seed):
         torch.backends.cudnn.benchmark = False
 
 def save_data(dataset, train_idx, val_idx, test_idx, args):
-    save_path = f'{args.out_path}/ckpts_{args.dataset_name}/dataset'
+    save_path = f'{args.out_path}/{args.dataset_name}/dataset'
     os.makedirs(save_path, exist_ok=True)
 
     with open(f'{save_path}/split_indices.pkl', 'wb') as f:
@@ -66,10 +66,9 @@ def save_data(dataset, train_idx, val_idx, test_idx, args):
     }, f'{save_path}/test_data.pt')
 
 def load_model(args, dataset):
-    dir_model = f'dim{args.d_model}_n{args.n_layers}h{args.n_heads}ff{args.d_ff}_bs{args.batch_size}_lr{args.lr}'
-    path_model = f'{args.out_path}/ckpts_{args.dataset_name}/{dir_model}/best_model.ckpt'
+    path_model = f'{args.out_path}/{args.dataset_name}/best_model.ckpt'
     
-    model = FragmentTransformer(dataset, args)
+    model = GGIFragGPT(dataset, args)
     
     ckpt = torch.load(path_model, map_location=torch.device('cpu'), weights_only=False)
     model.load_state_dict(ckpt['model_state_dict'])

@@ -26,7 +26,7 @@ def main(args):
     result = dataset.sig_info
     result = result.loc[result.index.to_list() * args.n_mols]
     result['generated'] = generated
-    result.to_csv(f'{args.out_path}/ckpts_{args.dataset_name}/{args.gen_file}')
+    result.to_csv(f'{args.out_path}/{args.dataset_name}/{args.gen_file}')
 
 if __name__ == '__main__':
     args = parse_args()

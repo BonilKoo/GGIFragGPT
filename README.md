@@ -58,20 +58,12 @@ python src/Geneformer_extract_embeddings.py \
 
 ### 2. Training
 ```bash
-python src/train.py \
-  --dataset_name train_dict_unk \
-  --device cuda:0 \
-  --d_model 16 \
-  --d_ff 64
+python src/train.py
 ```
 
 ### 3. Testing
 ```bash
-python src/test.py \
-  --dataset_name train_dict_unk \
-  --device cuda:0 \
-  --d_model 16 \
-  --d_ff 64
+python src/test.py
 ```
 
 ### 4. Generation

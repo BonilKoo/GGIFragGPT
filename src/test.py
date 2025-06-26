@@ -22,7 +22,7 @@ def main(args):
 
     result = test_dataset.sig_info
     result['generated'] = generated
-    result.to_csv(f'{args.out_path}/ckpts_{args.dataset_name}/generated.csv')
+    result.to_csv(f'{args.out_path}/{args.dataset_name}/generated.csv')
 
 if __name__ == '__main__':
     args = parse_args()

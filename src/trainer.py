@@ -40,9 +40,7 @@ class ModelTrainer():
         self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, mode='min',
                                                                     factor=0.7, patience=4, min_lr=1e-6)
 
-        self.folder = pathlib.Path(f'{self.args.out_path}/ckpts_{self.args.dataset_name}') / \
-                      f'dim{self.args.d_model}_n{self.args.n_layers}h{self.args.n_heads}ff{self.args.d_ff}_' \
-                      f'bs{self.args.batch_size}_lr{self.args.lr}'
+        self.folder = pathlib.Path(f'{self.args.out_path}/{self.args.dataset_name}')
         self.folder.mkdir(parents=True, exist_ok=True)
 
         self.best_val_loss = float('inf')
@@ -66,7 +64,7 @@ class ModelTrainer():
         self.log(f'Best model saved at epoch {epoch} with val_loss {val_loss:.5f}')
 
     def save_loss_records(self):
-        recorders_folder = self.folder / 'recorders'
+        recorders_folder = self.folder
         recorders_folder.mkdir(parents=True, exist_ok=True)
         train_record = pd.DataFrame(self.records['train_record'], columns=['epoch', 'train_loss', 'lr'])
         val_record = pd.DataFrame(self.records['val_record'], columns=['epoch', 'val_loss', 'lr'])
@@ -77,8 +75,7 @@ class ModelTrainer():
             'train_lr': train_record['lr'],
             'val_lr': val_record['lr'],
         })
-        csv_path = recorders_folder / f'record_dim{self.args.d_model}_n{self.args.n_layers}h{self.args.n_heads}ff' \
-                                      f'{self.args.d_ff}_bs{self.args.batch_size}_lr{self.args.lr}.csv'
+        csv_path = recorders_folder / f'record.csv'
         ret.to_csv(csv_path, index=False)
         return ret
 
@@ -155,7 +152,7 @@ class ModelTrainer():
                     self.log(f'Early stopping at epoch {epoch}')
                     break
 
-        self.save_loss_records
+        self.save_loss_records()
 
     def log(self, msg=None, msgs=None, with_time=False, show=True):
         if with_time and msg:
@@ -164,7 +161,7 @@ class ModelTrainer():
             mins = elapsed_secs / 60.
             msg = msg + f' time elapsed {hrs:2f} hrs ({mins:.1f} mins)'
 
-        log_folder = pathlib.Path(f'{self.args.out_path}/ckpts_{self.args.dataset_name}/log')
+        log_folder = pathlib.Path(f'{self.args.out_path}/{self.args.dataset_name}')
         log_folder.mkdir(parents=True, exist_ok=True)
         log_file = log_folder / 'log.txt'
         
@@ -239,9 +236,7 @@ class PreTrainer():
         self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, mode='min',
                                                                     factor=0.7, patience=4, min_lr=1e-6)
 
-        self.folder = pathlib.Path(f'{self.args.out_path}/ckpts_{self.args.dataset_name}') / \
-                      f'dim{self.args.d_model}_n{self.args.n_layers}h{self.args.n_heads}ff{self.args.d_ff}_' \
-                      f'bs{self.args.batch_size}_lr{self.args.lr}'
+        self.folder = pathlib.Path(f'{self.args.out_path}/{self.args.dataset_name}')
         self.folder.mkdir(parents=True, exist_ok=True)
 
         self.best_val_loss = float('inf')
@@ -265,7 +260,7 @@ class PreTrainer():
         self.log(f'Best model saved at epoch {epoch} with val_loss {val_loss:.5f}')
 
     def save_loss_records(self):
-        recorders_folder = self.folder / 'recorders'
+        recorders_folder = self.folder
         recorders_folder.mkdir(parents=True, exist_ok=True)
         train_record = pd.DataFrame(self.records['train_record'], columns=['epoch', 'train_loss', 'lr'])
         val_record = pd.DataFrame(self.records['val_record'], columns=['epoch', 'val_loss', 'lr'])
@@ -276,8 +271,7 @@ class PreTrainer():
             'train_lr': train_record['lr'],
             'val_lr': val_record['lr'],
         })
-        csv_path = recorders_folder / f'record_dim{self.args.d_model}_n{self.args.n_layers}h{self.args.n_heads}ff' \
-                                      f'{self.args.d_ff}_bs{self.args.batch_size}_lr{self.args.lr}.csv'
+        csv_path = recorders_folder / f'record.csv'
         ret.to_csv(csv_path, index=False)
         return ret
 
@@ -357,7 +351,7 @@ class PreTrainer():
             mins = elapsed_secs / 60.
             msg = msg + f' time elapsed {hrs:2f} hrs ({mins:.1f} mins)'
 
-        log_folder = pathlib.Path(f'{self.args.out_path}/ckpts_{self.args.dataset_name}/log')
+        log_folder = pathlib.Path(f'{self.args.out_path}/{self.args.dataset_name}')
         log_folder.mkdir(parents=True, exist_ok=True)
         log_file = log_folder / 'log.txt'
         

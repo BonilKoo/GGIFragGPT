@@ -68,7 +68,7 @@ def load_pretrained_weights(model, args):
     Function to update the model's frag_embedding and other parameters with pre-trained weights.
     
     Args:
-        model: The fine-tuning target model (e.g., FragmentTransformer)
+        model: The fine-tuning target model (e.g., GGIFragGPT)
         pretrained_state_dict: The state_dict from the pre-trained model
         pretrained_frag2idx: The token-to-index dictionary used in the pre-trained model
     """
@@ -105,9 +105,9 @@ def load_pretrained_weights(model, args):
 
     return model
 
-class FragmentTransformer(nn.Module):
+class GGIFragGPT(nn.Module):
     def __init__(self, dataset, args):
-        super(FragmentTransformer, self).__init__()
+        super(GGIFragGPT, self).__init__()
         self.params = args
         self.d_model = args.d_model
         self.frag2idx = dataset.frag2idx
@@ -136,15 +136,15 @@ class FragmentTransformer(nn.Module):
         # ge (bs, 978, 512)
         # cell_lines (bs)
         # fragments (bs, 13)
-        ge = self.gene_proj_layer(ge) # (bs, 978, 64)
-        cell_lines = self.cell_line_embedding(cell_lines) # (bs, 4)
-        cell_lines = cell_lines.unsqueeze(1).expand(-1, ge.size()[1], -1) # (bs, 978, 4)
-        
-        ge_cell_lines = torch.cat([ge, cell_lines], dim=-1) # (bs, 978, 64+4)
-        ge_cell_lines = self.gene_cell_line_proj_layer(ge_cell_lines) # (bs, 978, 64)
+        ge = self.gene_proj_layer(ge) # (bs, 978, args.d_model)
+        cell_lines = self.cell_line_embedding(cell_lines) # (bs, args.d_cell_line)
+        cell_lines = cell_lines.unsqueeze(1).expand(-1, ge.size()[1], -1) # (bs, 978, args.d_cell_line)
 
-        fragments_emb = self.frag_embedding(fragments) # (bs, 13, 64)
-        fragments_pos = self.position(fragments_emb) # (bs, 13, 64)
+        ge_cell_lines = torch.cat([ge, cell_lines], dim=-1) # (bs, 978, args.d_model + args.d_cell_line)
+        ge_cell_lines = self.gene_cell_line_proj_layer(ge_cell_lines) # (bs, 978, args.d_model)
+
+        fragments_emb = self.frag_embedding(fragments) # (bs, 13, args.d_model)
+        fragments_pos = self.position(fragments_emb) # (bs, 13, args.d_model)
 
         tgt_seq_len = fragments.size(1) - 1 # 12
 
