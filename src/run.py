@@ -47,7 +47,7 @@ def generate(args):
     seed_everything(args.seed)
     device = torch.device(args.device if torch.cuda.is_available() else 'cpu')
 
-    dataset = GenerationDataset(args.data_path, args.dataset_name, args.ge_emb, args.sig_data)
+    dataset = GenerationDataset(args.out_path, args.dataset_name, args.ge_emb, args.sig_data)
     args.ge_dim = dataset.ge_emb.shape[-1]
     
     model = load_model(args, dataset)

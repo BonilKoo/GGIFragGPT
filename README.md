@@ -58,26 +58,27 @@ python src/Geneformer_extract_embeddings.py \
 
 ### 2. Training
 ```bash
-python src/train.py
+python src/run.py train \
+  --out_path ./result \
+  --dataset_name experiment
 ```
 
 ### 3. Testing
 ```bash
-python src/test.py
+python src/run.py test \
+  --out_path ./result \
+  --dataset_name experiment
 ```
 
 ### 4. Generation
 ```bash
-python src/generate.py \
-  --ge_emb data/processed_level5_beta_trt_sh_CDK7.pt \
-  --sig_data data/processed_siginfo_beta_trt_sh_CDK7.tsv \
-  --gen_file sh_CDK7.csv \
-  --n_mols 1000 \
-  --dataset_name train_dict_unk \
-  --device cuda:0 \
-  --d_model 16 \
-  --d_ff 64 \
-  --data_path ../../result
+python src/run.py generate \
+  --out_path ./result \
+  --dataset_name experiment \
+  --ge_emb ./data/generation/processed_level5_beta_trt_sh_CDK7.pt \
+  --sig_data ./data/generation/processed_siginfo_beta_trt_sh_CDK7.tsv \
+  --gen_file generated_shRNA_CDK7.csv \
+  --n_mols 1000
 ```
 
 #### Common Arguments

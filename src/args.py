@@ -299,6 +299,24 @@ def parse_args2():
     subparser_generate = subparsers.add_parser('generate', help='generate')
 
     subparser_generate.add_argument(
+            '--ge_emb', type=str, default='./data/extracted_geneformer_embs.pt',
+            help="Path to the gene expression embedding file used for training."
+        )
+    subparser_generate.add_argument(
+        '--sig_data', type=str, default='./data/LINCS/processed_siginfo_beta_trt_cp.tsv',
+        help="Path to the signature data file (TSV format)."
+    )
+
+    subparser_generate.add_argument(
+        '--dataset_name', type=str, default='experiment',
+        help="Name of the dataset to be used."
+    )
+    subparser_generate.add_argument(
+        '--out_path', type=str, default='./result',
+        help="Output directory where results and checkpoints will be saved."
+    )
+
+    subparser_generate.add_argument(
         '--n_mols', type=int, default=1,
         help="“"
     )
