@@ -1,0 +1,39 @@
+{
+  "citation": "",
+  "description": "",
+  "features": {
+    "input_ids": {
+      "feature": {
+        "dtype": "int64",
+        "_type": "Value"
+      },
+      "_type": "Sequence"
+    },
+    "length": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "cell_type": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "individual": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "age": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "sex": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "disease": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": ""
+}

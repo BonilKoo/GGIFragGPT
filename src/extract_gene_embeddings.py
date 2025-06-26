@@ -58,7 +58,7 @@ def load_data(args):
     else:
         raise ValueError('Gene names in --ge and --token are not matched.')
     
-    sig_info = pd.read_table(args.sig, index_col=0)
+    sig_info = pd.read_table(args.sig, index_col='sig_id')
 
     if (data.index != sig_info.index).sum() != 0:
         raise ValueError('Signature IDs are not matched.')

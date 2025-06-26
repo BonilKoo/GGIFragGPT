@@ -7,8 +7,7 @@ GGIFragGPT: transcriptome-conditioned molecule generation via gene-gene interact
 
 The code has been tested in the following environment:
 
-Environment file:  
-`environment.yml`
+Environment file: `environment.yml`
 
 - Python 3.10.16
 - anndata 0.11.3
@@ -94,8 +93,8 @@ python src/extract_gene_embeddings.py \
 python src/run.py generate \
   --out_path ./result \
   --dataset_name experiment \
-  --ge_emb ./data/generation/processed_level5_beta_trt_sh_CDK7.pt \
-  --sig_data ./data/generation/processed_siginfo_beta_trt_sh_CDK7.tsv \
+  --ge_emb ./data/generation/extracted_geneformer_embs.pt \
+  --sig_data ./data/generation/siginfo_beta_trt_sh_CDK7.tsv \
   --gen_file generated_shRNA_CDK7.csv \
   --n_mols 1000
 ```
