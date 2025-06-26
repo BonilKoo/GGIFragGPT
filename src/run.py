@@ -2,8 +2,7 @@ from tqdm import tqdm
 import torch
 from torch.utils.data import random_split
 
-# from args import parse_args
-from args import parse_args2
+from args import parse_args
 from dataset import TrainDataset, TestDataset, GenerationDataset
 from model import GGIFragGPT
 from trainer import ModelTrainer, MoleculeGenerator
@@ -63,8 +62,7 @@ def generate(args):
     result.to_csv(f'{args.out_path}/{args.dataset_name}/{args.gen_file}')
 
 if __name__ == '__main__':
-    # args = parse_args()
-    args = parse_args2()
+    args = parse_args()
 
     if args.command == 'train':
         train(args)
