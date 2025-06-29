@@ -38,10 +38,13 @@ You can set up the environment using [Mamba](https://github.com/conda-forge/mini
 mamba env create -f environment.yml
 mamba activate GGIFragGPT
 pip install optuna-integration\[tensorboard\]==4.2.1 --no-deps
-pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124 # check your NVIDIA driver version on your system
+# check your NVIDIA driver version on your system
+pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
 ```
 
 ## Usage
+
+You can download additional files related to this project from the following Figshare link: https://doi.org/10.6084/m9.figshare.29432486.
 
 ### 1. Gene embedding extraction (Geneformer)
 ```bash
