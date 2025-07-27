@@ -89,7 +89,7 @@ python src/extract_gene_embeddings.py \
   --sig ./data/generation/siginfo_beta_trt_sh_CDK7.tsv \
   --cell ./data/LINCS/processed_cellinfo_beta.tsv \
   --token ./data/Geneformer/LINCS_lm_token_95M.csv \
-  --out extracted_geneformer_embs.pt
+  --out extracted_geneformer_embs_CDK7.pt
 ```
 
 #### Step 3: run generation
@@ -97,7 +97,7 @@ python src/extract_gene_embeddings.py \
 python src/run.py generate \
   --out_path ./result \
   --dataset_name experiment \
-  --ge_emb ./data/generation/extracted_geneformer_embs.pt \
+  --ge_emb ./data/generation/extracted_geneformer_embs_CDK7.pt \
   --sig_data ./data/generation/siginfo_beta_trt_sh_CDK7.tsv \
   --gen_file generated_shRNA_CDK7.csv \
   --n_mols 1000
