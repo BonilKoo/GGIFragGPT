@@ -46,6 +46,12 @@ def parse_args():
         default='./data/Geneformer/LINCS_lm_token_95M.csv',
     )
 
+    parser.add_argument(
+        '--out',
+        type=str,
+        default='extracted_geneformer_embs.pt',
+    )
+
     args = parser.parse_args()
     return args
 
@@ -74,7 +80,10 @@ def make_dataset_file(data, sig_info, cell_info, args):
         length = len(input_ids)
         cell_type = sig_info.loc[sig_id, 'cell_iname']
         individual = idx
-        age = float(cell_info.loc[cell_type, 'donor_age'])
+        try:
+            age = float(cell_info.loc[cell_type, 'donor_age'])
+        except KeyError:
+            continue
         sex = cell_info.loc[cell_type, 'donor_sex']
         disease = cell_info.loc[cell_type, 'primary_disease']
 
@@ -102,7 +111,7 @@ def extract_geneformer_embeddings(dataset_file, args):
 
     embs = embs.type(torch.float16)
 
-    torch.save(embs, f'{args.data_dir}/extracted_geneformer_embs.pt')
+    torch.save(embs, f'{args.data_dir}/{args.out}')
 
 def main(args):
     data, sig_info, cell_info = load_data(args)
