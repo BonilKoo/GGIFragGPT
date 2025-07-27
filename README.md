@@ -88,7 +88,8 @@ python src/extract_gene_embeddings.py \
   --ge ./data/generation/level5_beta_trt_sh_CDK7.tsv \
   --sig ./data/generation/siginfo_beta_trt_sh_CDK7.tsv \
   --cell ./data/LINCS/processed_cellinfo_beta.tsv \
-  --token ./data/Geneformer/LINCS_lm_token_95M.csv
+  --token ./data/Geneformer/LINCS_lm_token_95M.csv \
+  --out extracted_geneformer_embs.pt
 ```
 
 #### Step 3: run generation
