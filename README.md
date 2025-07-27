@@ -53,7 +53,8 @@ python src/extract_gene_embeddings.py \
   --ge ./data/LINCS/processed_level5_beta_trt_cp.tsv \
   --sig ./data/LINCS/processed_siginfo_beta_trt_cp.tsv \
   --cell ./data/LINCS/processed_cellinfo_beta.tsv \
-  --token ./data/Geneformer/LINCS_lm_token_95M.csv
+  --token ./data/Geneformer/LINCS_lm_token_95M.csv \
+  --out extracted_geneformer_embs.pt
 ```
 
 *Output*: `./data/extracted_geneformer_embs.pt`
