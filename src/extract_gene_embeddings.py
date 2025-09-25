@@ -83,7 +83,7 @@ def make_dataset_file(data, sig_info, cell_info, args):
         try:
             age = float(cell_info.loc[cell_type, 'donor_age'])
         except KeyError:
-            continue
+            age = float('nan')
         sex = cell_info.loc[cell_type, 'donor_sex']
         disease = cell_info.loc[cell_type, 'primary_disease']
 
