@@ -59,6 +59,7 @@ def load_data(args):
     data = pd.read_table(args.ge, index_col=0)
     df_LINCS_lm_token = pd.read_csv(args.token)
 
+    data = data[df_LINCS_lm_token['gene_name']]
     if (data.columns != df_LINCS_lm_token['gene_name']).sum() == 0:
         data.columns = df_LINCS_lm_token['token']
     else:
