@@ -25,19 +25,19 @@ def parse_args():
     parser.add_argument(
         '--ge',
         type=str,
-        default='./data/LINCS/processed_level5_beta_trt_cp.tsv',
+        required=True,
     )
 
     parser.add_argument(
         '--sig',
         type=str,
-        default='./data/LINCS/processed_siginfo_beta_trt_cp.tsv',
+        default=None,
     )
 
     parser.add_argument(
         '--cell',
         type=str,
-        default='./data/LINCS/processed_cellinfo_beta.tsv',
+        default=None,
     )
 
     parser.add_argument(
@@ -64,12 +64,18 @@ def load_data(args):
     else:
         raise ValueError('Gene names in --ge and --token are not matched.')
     
-    sig_info = pd.read_table(args.sig, index_col='sig_id')
+    if args.sig is not None:
+        sig_info = pd.read_table(args.sig, index_col='sig_id')
 
-    if (data.index != sig_info.index).sum() != 0:
-        raise ValueError('Signature IDs are not matched.')
+        if (data.index != sig_info.index).sum() != 0:
+            raise ValueError('Signature IDs are not matched.')
+    else:
+        sig_info = None
     
-    cell_info = pd.read_table(args.cell, index_col=0)
+    if args.cell is not None:
+        cell_info = pd.read_table(args.cell, index_col=0)
+    else:
+        cell_info = None
 
     return data, sig_info, cell_info
 
@@ -78,14 +84,22 @@ def make_dataset_file(data, sig_info, cell_info, args):
     for idx, (sig_id, row) in enumerate(data.iterrows()):
         input_ids = [2] + row.sort_values(ascending=False).index.to_list()
         length = len(input_ids)
-        cell_type = sig_info.loc[sig_id, 'cell_iname']
+        if sig_info is not None:
+            cell_type = sig_info.loc[sig_id, 'cell_iname']
+        else:
+            cell_type = float('nan')
         individual = idx
-        try:
-            age = float(cell_info.loc[cell_type, 'donor_age'])
-        except KeyError:
+        if cell_info is not None:
+            try:
+                age = float(cell_info.loc[cell_type, 'donor_age'])
+            except KeyError:
+                age = float('nan')
+            sex = cell_info.loc[cell_type, 'donor_sex']
+            disease = cell_info.loc[cell_type, 'primary_disease']
+        else:
             age = float('nan')
-        sex = cell_info.loc[cell_type, 'donor_sex']
-        disease = cell_info.loc[cell_type, 'primary_disease']
+            sex = float('nan')
+            disease = float('nan')
 
         dataset.append([input_ids, length, cell_type, individual, age, sex, disease])
 
