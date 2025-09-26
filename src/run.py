@@ -56,7 +56,10 @@ def generate(args):
     for _ in tqdm(range(args.n_mols)):
         generated.extend(generator.generate())
 
-    result = dataset.sig_info
+    if dataset.sig_info is not None:
+        result = dataset.sig_info
+    else:
+        result = pd.DataFrame(index=(range(len(dataset.ge_emb)))
     result = result.loc[result.index.to_list() * args.n_mols]
     result['generated'] = generated
     result.to_csv(f'{args.out_path}/{args.dataset_name}/{args.gen_file}')
