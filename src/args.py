@@ -21,7 +21,7 @@ def get_common_model_args():
 def get_common_data_args():
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('--ge_emb', type=str, default='./data/extracted_geneformer_embs.pt', help='Path to the gene embeddings file.')
-    parser.add_argument('--sig_data', type=str, default='./data/LINCS/processed_siginfo_beta_trt_cp.tsv', help='Path to the signature data file.')
+    parser.add_argument('--sig_data', type=str, default=None, help='Path to the signature data file.')
     return parser
 
 def parse_args():
