@@ -147,6 +147,6 @@ python src/run.py generate \
 | `--n_mols` | `int` | `1` | Number of molecules to generate |
 | `--gen_file` | `str` | `generated.csv` | Output file for SMILES generation |
 | `--ge_emb` | `str` | _(required)_ | Gene expression embedding path |
-| `--sig_data` | `str` | _(required)_ | Signature TSV file |
+| `--sig_data` | `str` | None | Signature TSV file |
 
 ---
