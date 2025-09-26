@@ -238,17 +238,23 @@ class GenerationDataset(Dataset):
             metadata = pickle.load(f)
         self.ge_emb = torch.load(self.ge_file)
         
-        self.sig_info = pd.read_table(self.sig_file)
+        if self.sig_file is not None:
+            self.sig_info = pd.read_table(self.sig_file)
+        else:
+            self.sig_info = None
         # self.sig_info['fragments'] = [ast.literal_eval(frags) for frags in self.sig_info['fragments']]
         
         self.frag2idx = metadata['frag2idx']
         self.idx2frag = metadata['idx2frag']
 
         self.cell2idx = metadata['cell2idx']
-        for idx, row in self.sig_info.iterrows():
-            if row['cell_iname'] not in self.cell2idx.keys():
-                self.sig_info.drop(index=idx, inplace=True)
-        self.cell_lines = torch.from_numpy(np.array([self.cell2idx[cell_line] for cell_line in self.sig_info['cell_iname']], dtype=np.int64))
+        if self.sig_info is not None:
+            for idx, row in self.sig_info.iterrows():
+                if row['cell_iname'] not in self.cell2idx.keys():
+                    self.sig_info.drop(index=idx, inplace=True)
+            self.cell_lines = torch.from_numpy(np.array([self.cell2idx[cell_line] for cell_line in self.sig_info['cell_iname']], dtype=np.int64))
+        else:
+            self.cell_lines = torch.zeros(len(self.ge_emb), dtype=np.int64)
 
         self.max_len = metadata['max_len']
         self.vocab_size = metadata['vocab_size']
