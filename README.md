@@ -1,5 +1,5 @@
 # GGIFragGPT
-GGIFragGPT: transcriptome-conditioned molecule generation via gene-gene interaction-aware fragment modeling
+GGIFragGPT: GGIFragGPT: Transcriptome-conditioned molecule generation via gene interaction-aware fragment modeling with a GPT-based architecture
 
 ## Installation
 
