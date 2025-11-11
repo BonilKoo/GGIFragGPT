@@ -150,3 +150,18 @@ python src/run.py generate \
 | `--sig_data` | `str` | None | Signature TSV file |
 
 ---
+
+## Citation
+
+```
+@article{koo2025transcriptome,
+  title={Transcriptome-conditioned molecule generation via gene interaction-aware fragment modeling with a GPT-based architecture},
+  author={Koo, Bonil and Park, Bo Kyung and Kim, Sun},
+  journal={Scientific Reports},
+  volume={15},
+  number={1},
+  pages={38523},
+  year={2025},
+  publisher={Nature Publishing Group UK London}
+}
+```
