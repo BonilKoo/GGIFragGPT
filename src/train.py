@@ -24,6 +24,5 @@ def main(args):
     trainer.train()
 
 if __name__ == '__main__':
-    # args = parse_args()
-    args = parse_args2()
+    args = parse_args()
     main(args)
