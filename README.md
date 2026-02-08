@@ -1,5 +1,5 @@
 # GGIFragGPT
-GGIFragGPT: Transcriptome-conditioned molecule generation via gene interaction-aware fragment modeling with a GPT-based architecture
+[GGIFragGPT](https://doi.org/10.1038/s41598-025-17439-7): Transcriptome-conditioned molecule generation via gene interaction-aware fragment modeling with a GPT-based architecture
 
 ## Installation
 
