@@ -30,7 +30,7 @@ def parse_args():
     )
     subparsers = parser.add_subparsers(dest='command', help='Subcommands.')
 
-    # 공통 parser 정의
+    # defien common parser
     model_args = get_common_model_args()
     data_args = get_common_data_args()
 
